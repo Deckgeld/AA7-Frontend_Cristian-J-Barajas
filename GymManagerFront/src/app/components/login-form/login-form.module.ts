@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './login-form.component';
 import { MaterialModel } from 'src/material.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,7 +12,8 @@ import { MaterialModel } from 'src/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModel
+    MaterialModel,
+    FormsModule
   ],
   exports: [
     LoginFormComponent

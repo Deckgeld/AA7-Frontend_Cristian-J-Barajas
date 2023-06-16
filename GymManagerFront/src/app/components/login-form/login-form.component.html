@@ -1,30 +1,30 @@
-<form>
+<form #myForm="ngForm" (ngSubmit)="onSubmitForm(myForm)">
     <!-- 2 column grid layout with text inputs for the first and last names -->
     <div class="row" *ngIf="isSingUp == true">
       <mat-form-field appearance="outline" class="col-md-6 mb-4">
         <mat-label>First name</mat-label>
-        <input matInput placeholder="Introduce your name">
+        <input matInput placeholder="Introduce your name" name="name" ngModel>
         <!--Quitamos el texto que tiene abajo y el emojie-->
       </mat-form-field>
       
       <mat-form-field appearance="outline" class="col-md-6 mb-4">
         <mat-label>Last name</mat-label>
-        <input matInput placeholder="please, tell me your last name">
+        <input matInput placeholder="please, tell me your last name" name="lastName" ngModel>
       </mat-form-field>
     </div>
 
     <!-- Email input -->    
     <mat-form-field appearance="outline" class="col-md-12 mb-4">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="pat@example.com">
+      <input matInput placeholder="pat@example.com" name="email" ngModel>
     </mat-form-field>
     
     <!-- Password input -->
     <mat-form-field appearance="outline" class="col-md-12 mb-4">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="your password">
+      <input matInput placeholder="your password" name="password" ngModel>
     </mat-form-field>
     
     <!-- Submit button -->
-    <button mat-raised-button color="primary" class="col-md-12"> {{isSingUp ? 'Sing up':'Sing in'}} </button>
+    <button type="submit" mat-raised-button color="primary" class="col-md-12"> {{isSingUp ? 'Sing up':'Sing in'}} </button>
   </form>

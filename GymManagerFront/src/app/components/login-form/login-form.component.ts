@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -7,5 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class LoginFormComponent {
   @Input() isSingUp:boolean = true; 
+
+  onSubmitForm(f:NgForm){
+    console.log('Valores del form', f.value);
+    console.log('Mi form', f);
+  }
 }
  
