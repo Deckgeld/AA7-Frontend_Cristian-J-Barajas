@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-login-form',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent {
-
+  @Input() isSingUp:boolean = true; 
 }
+ 

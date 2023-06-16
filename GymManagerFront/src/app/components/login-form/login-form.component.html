@@ -1,6 +1,6 @@
 <form>
     <!-- 2 column grid layout with text inputs for the first and last names -->
-    <div class="row">
+    <div class="row" *ngIf="isSingUp == true">
       <mat-form-field appearance="outline" class="col-md-6 mb-4">
         <mat-label>First name</mat-label>
         <input matInput placeholder="Introduce your name">
@@ -26,5 +26,5 @@
     </mat-form-field>
     
     <!-- Submit button -->
-    <button mat-raised-button color="primary" class="col-md-12">Sign in / Sing up</button>
+    <button mat-raised-button color="primary" class="col-md-12"> {{isSingUp ? 'Sing up':'Sing in'}} </button>
   </form>
