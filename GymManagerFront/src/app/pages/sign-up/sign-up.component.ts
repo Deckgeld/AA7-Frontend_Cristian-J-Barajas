@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SignUpComponent {
 
+  resposeForm(response:any){
+    console.log('Respuesta desde Sign Up', response)
+  }
+
 }

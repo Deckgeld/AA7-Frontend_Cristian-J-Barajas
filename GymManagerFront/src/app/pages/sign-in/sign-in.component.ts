@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SignInComponent {
 
+  resposeForm(response:any){
+    console.log('Respuesta desde Sign In', response)
+  }
 }
