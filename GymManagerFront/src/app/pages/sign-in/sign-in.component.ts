@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { singIn } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 
 @Component({
@@ -14,8 +15,8 @@ export class SignInComponent {
       private router: Router
     ) {}
   
-  resposeForm(response:any){
+  resposeForm(response:singIn){
     console.log('Respuesta desde Sign In', response)
-    this.login.SignIn(response.value).subscribe(console.log);
+    this.login.SignIn(response).subscribe(console.log);
   }
 }
