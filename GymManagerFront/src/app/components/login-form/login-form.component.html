@@ -3,13 +3,19 @@
     <div class="row" *ngIf="isSingUp == true">
       <mat-form-field appearance="outline" class="col-md-6 mb-4">
         <mat-label>First name</mat-label>
-        <input matInput placeholder="Introduce your name" formControlName="name">
+        <input matInput placeholder="Introduce your name" formControlName="firstName">
       </mat-form-field>
       
       <mat-form-field appearance="outline" class="col-md-6 mb-4">
         <mat-label>Last name</mat-label>
         <input matInput placeholder="please, tell me your last name" formControlName="lastName">
       </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="col-md-12 mb-4">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="please, Phone" formControlName="phoneNumber">
+      </mat-form-field>
+
     </div>
 
     <!-- Email input -->    
