@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InitLayoutComponent } from './share/init-layout/init-layout.component';
 import { AdminLayoutComponent } from './share/admin-layout/admin-layout.component';
+import { hasSessionGuard } from './core/guards/has-session.guard';
+
 
 const routes: Routes = [
   //Esta line la generamos nosotros y es para que sign-in sea la pagina por defecto
@@ -14,9 +16,9 @@ const routes: Routes = [
   },
   //RUTAS que tendran el LAYOUT AdminLayout
   { path: '', component: AdminLayoutComponent, children:[
-      { path: 'inventory', loadChildren: () => import('./pages/inventory/inventory.module').then(m => m.InventoryModule) }, 
-      { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) }, 
-      { path: 'users', loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule) }, 
+      { path: 'inventory', loadChildren: () => import('./pages/inventory/inventory.module').then(m => m.InventoryModule), canActivate: [hasSessionGuard] }, 
+      { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canMatch: [hasSessionGuard] }, 
+      { path: 'users', loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule), canActivate: [hasSessionGuard] }, 
       { path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) },
     ] 
   },
@@ -25,7 +27,7 @@ const routes: Routes = [
 ];
   
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

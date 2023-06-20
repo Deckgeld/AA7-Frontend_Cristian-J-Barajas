@@ -23,7 +23,7 @@ export class AccountService {
   //Servicio SignIn
   SignIn(request: singIn): Observable<any>{
     //Endpoint de APIs
-    let url: string = `${this.urlBase}api/account`;   
+    let url: string = `${this.urlBase}api/Account`;   
     //request a la API
     return this.http.post<any>(url, request, this.httpOptions);
   }

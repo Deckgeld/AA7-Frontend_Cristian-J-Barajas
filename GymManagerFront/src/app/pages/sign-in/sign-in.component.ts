@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { singIn } from 'src/app/core/interfaces/user';
+import { singIn, singInResponse } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,8 +16,15 @@ export class SignInComponent {
       private router: Router
     ) {}
   
-  resposeForm(response:singIn){
-    console.log('Respuesta desde Sign In', response)
-    this.login.SignIn(response).subscribe(console.log);
+  resposeForm(request:singIn){
+    this.login.SignIn(request).subscribe((response:singInResponse) => {
+      if(response.message === 'Authorized'){
+        environment.hasSession = true;
+        this.router.navigate(['/home']);
+      }
+    });
   }
 }
+
+//https://localhost:44360/api/account
+//https://localhost:44360/api/Account

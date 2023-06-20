@@ -5,15 +5,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!hasSession; else withSession">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" [routerLink]="['/sign-in']">sign in</a>
+            <a class="nav-link" aria-current="page" [routerLink]="['/sign-in']">Sign in</a>
           </li>
           <li class="nav-item">
             <!--routerLink es la forma que tenemos en angular para redireccionar a otra pagina-->
-            <a class="nav-link" [routerLink]="['/sign-up']">sign up</a>
+            <a class="nav-link" [routerLink]="['/sign-up']">Sign up</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  
+  <ng-template #withSession>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" [routerLink]="['/sign-in']">Sign out</a>
+      </li>
+    </ul>
+  </ng-template>

@@ -12,4 +12,19 @@ export interface singIn{
     password: string
 }
 
+////
+export interface singInResponse{
+    hasError: boolean;
+    message: string,
+    model: model;
+    requestId: string;
+}
+
+export interface model{
+    id: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    status: boolean
+}
 
