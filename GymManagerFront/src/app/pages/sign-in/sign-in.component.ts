@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { singIn, singInResponse } from 'src/app/core/interfaces/user';
+import { singIn } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
+import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -13,21 +14,21 @@ export class SignInComponent {
 
   constructor(
       private login: AccountService,
-      private router: Router
+      private router: Router,
+      private alertS: SwalAlertService
     ) {}
   
   resposeForm(request:singIn){
     this.login.SignIn(request).subscribe(response => {
+      //Valida consultas invalidas, como correo o contraseña incorrectos
       if (response.hasError){
-        alert('Error de capa 8, valida tus credenciales')
+          this.alertS.errorAlert('Usuario o contraseña incorrecto, favor de validar sus credenciales', 'Error!')
       }
       if(response.message === 'Authorized'){
         environment.hasSession = true;
         this.router.navigate(['/home']);
       }
-    });
+    },);
   }
 }
 
-//https://localhost:44360/api/account
-//https://localhost:44360/api/Account

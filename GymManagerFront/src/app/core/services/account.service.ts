@@ -4,6 +4,7 @@ import { User, singIn } from '../interfaces/user';
 import { Observable, throwError } from 'rxjs';     
 import { catchError } from 'rxjs/operators';
 import { ResponseModel } from '../interfaces/response-model';
+import { SwalAlertService } from './swal-alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,18 @@ export class AccountService {
     })
   }
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private http:HttpClient,
+    private alertS: SwalAlertService
+  ) { }
 
   errorHandler(error:HttpErrorResponse){
     let errorMessage = `Error Code: ${error.status}`;
     //valida errores
-    if(error.status != 200){
+    if(error.status == 4040){
+      this.alertS.errorAlert('Lo sentimos, error detectado, favor de validar mas tarde', 'Error inesperado')
       errorMessage = `${errorMessage} \n message: ${error.error.message}`
     }
-    //Valida consultas invalidas, como correo o contraseña incorrectos
     if(error.error.hasError && error.status == 200){
       errorMessage = `message: ${error.error.message}`
     }
