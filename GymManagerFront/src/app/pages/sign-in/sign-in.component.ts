@@ -17,7 +17,10 @@ export class SignInComponent {
     ) {}
   
   resposeForm(request:singIn){
-    this.login.SignIn(request).subscribe((response:singInResponse) => {
+    this.login.SignIn(request).subscribe(response => {
+      if (response.hasError){
+        alert('Error de capa 8, valida tus credenciales')
+      }
       if(response.message === 'Authorized'){
         environment.hasSession = true;
         this.router.navigate(['/home']);

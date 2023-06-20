@@ -1,7 +1,9 @@
-import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, singIn } from '../interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';     
+import { catchError } from 'rxjs/operators';
+import { ResponseModel } from '../interfaces/response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +22,30 @@ export class AccountService {
 
   constructor(private http:HttpClient) { }
 
-  //Servicio SignIn
-  SignIn(request: singIn): Observable<any>{
-    //Endpoint de APIs
+  errorHandler(error:HttpErrorResponse){
+    let errorMessage = `Error Code: ${error.status}`;
+    //valida errores
+    if(error.status != 200){
+      errorMessage = `${errorMessage} \n message: ${error.error.message}`
+    }
+    //Valida consultas invalidas, como correo o contraseña incorrectos
+    if(error.error.hasError && error.status == 200){
+      errorMessage = `message: ${error.error.message}`
+    }
+    return throwError(errorMessage)
+  }
+
+  SignIn(request: singIn): Observable<ResponseModel<any>>{
     let url: string = `${this.urlBase}api/Account`;   
-    //request a la API
-    return this.http.post<any>(url, request, this.httpOptions);
+    return this.http.post<ResponseModel<any>>(url, request, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
   }
   
-  //Que es Observable
-  SignUp(request: User): Observable<any>{
+  SignUp(request: User): Observable<ResponseModel<any>>{
     let url: string = `${this.urlBase}api/user`;   
-    return <any>this.http.post(url, request, this.httpOptions);
+    //pipe redirecciona al errorHandler
+    //catchError se debe importar desde 'rxjs/operators'
+    return <any>this.http.post<ResponseModel<any>>(url, request, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
   }
 }
