@@ -17,7 +17,7 @@ const routes: Routes = [
   //RUTAS que tendran el LAYOUT AdminLayout
   { path: '', component: AdminLayoutComponent, children:[
       { path: 'inventory', loadChildren: () => import('./pages/inventory/inventory.module').then(m => m.InventoryModule), canActivate: [hasSessionGuard] }, 
-      { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canMatch: [hasSessionGuard] }, 
+      { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canActivate: [hasSessionGuard] }, 
       { path: 'users', loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule), canActivate: [hasSessionGuard] }, 
       { path: 'not-found', loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) },
     ] 

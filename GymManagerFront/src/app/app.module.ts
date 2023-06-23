@@ -9,6 +9,7 @@ import { InitLayoutComponent } from './share/init-layout/init-layout.component';
 import { AdminLayoutComponent } from './share/admin-layout/admin-layout.component';
 import { NavbarComponent } from './share/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModel,
-    HttpClientModule
+    HttpClientModule,
+    CookieModule.withOptions()
   ],
   providers: [],
   bootstrap: [AppComponent]

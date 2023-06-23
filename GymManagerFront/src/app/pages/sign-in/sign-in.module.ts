@@ -8,7 +8,7 @@ import { LoginFormModule } from 'src/app/components/login-form/login-form.module
 
 @NgModule({
   declarations: [
-    SignInComponent
+    SignInComponent,
   ],
   imports: [
     CommonModule,

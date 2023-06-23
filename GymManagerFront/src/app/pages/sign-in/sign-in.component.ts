@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie';
 import { singIn } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 import { SwalAlertService } from 'src/app/core/services/swal-alert.service';
@@ -15,7 +16,8 @@ export class SignInComponent {
   constructor(
       private login: AccountService,
       private router: Router,
-      private alertS: SwalAlertService
+      private alertS: SwalAlertService,
+      private cookie: CookieService
     ) {}
   
   resposeForm(request:singIn){
@@ -25,7 +27,13 @@ export class SignInComponent {
           this.alertS.errorAlert('Usuario o contraseña incorrecto, favor de validar sus credenciales', 'Error!')
       }
       if(response.message === 'Authorized'){
-        environment.hasSession = true;
+        //Constante que guarda el usaurio loggeado, y un hasSession= true
+        const session = { ...response.model, hasSession: true }    
+        //lo pasamos a json y lo codificamos en base 64
+        let objTemp = btoa(JSON.stringify(session));
+
+        //Genera una nueva cookie
+        this.cookie.put('session', objTemp)
         this.router.navigate(['/home']);
       }
     },);
