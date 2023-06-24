@@ -16,7 +16,7 @@ import { CookieModule } from 'ngx-cookie';
     AppComponent,
     InitLayoutComponent,
     AdminLayoutComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule, 
@@ -24,7 +24,7 @@ import { CookieModule } from 'ngx-cookie';
     BrowserAnimationsModule,
     MaterialModel,
     HttpClientModule,
-    CookieModule.withOptions()
+    CookieModule.withOptions(),
   ],
   providers: [],
   bootstrap: [AppComponent]

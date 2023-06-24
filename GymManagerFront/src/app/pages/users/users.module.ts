@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 import { MaterialModel } from 'src/material.module';
+import { LoginFormModule } from 'src/app/components/login-form/login-form.module';
+import { UserEditorModule } from 'src/app/components/user-editor/user-editor.module';
+//import { UserEditorModule } from '../../components/userEditor/user-editor/user-editor.module';
+//import { UserEditorModule } from 'src/app/components/userEditor/user-editor/user-editor.module';
 
 
 @NgModule({
@@ -13,7 +17,9 @@ import { MaterialModel } from 'src/material.module';
   imports: [
     CommonModule,
     UsersRoutingModule, 
-    MaterialModel
+    MaterialModel,
+    LoginFormModule,
+    UserEditorModule
   ]
 })
 export class UsersModule { }

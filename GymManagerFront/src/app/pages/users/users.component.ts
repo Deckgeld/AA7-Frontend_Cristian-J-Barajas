@@ -28,6 +28,7 @@ export class UsersComponent implements OnInit {
   //MatSort pertenece a @angular/material/sort
   @ViewChild(MatSort) sort!: MatSort; 
   //!: nos a no iniclizar un valor, sino que espere hasta que tenga uno
+  display : string = 'none';
 
 
   constructor(
@@ -53,6 +54,13 @@ export class UsersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  openModal(row: User){
+    console.log(row)
+    this.display = "block";
+  }
+  onCloseHandled(){
+    this.display = "none";
   }
 
 }
