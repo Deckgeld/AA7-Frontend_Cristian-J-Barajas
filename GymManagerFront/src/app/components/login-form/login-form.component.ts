@@ -8,7 +8,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginFormComponent implements OnChanges{
   @Input() isSingUp!:boolean; 
+  @Input() hasSession!:boolean; 
+  @Input() myModal!: bootstrap.Modal;
+
   @Output() resposeForm: EventEmitter<any> = new EventEmitter()
+  @Output() closeModalEvent: EventEmitter<boolean> = new EventEmitter<boolean>()
 
   formUser!: FormGroup;
   defaultFields = {
@@ -38,6 +42,7 @@ export class LoginFormComponent implements OnChanges{
     if (this.isSingUp){
       userFields =  {...this.defaultFields, ...this.extraFields}
     }
+
     this.formUser = this.fb.group(
       //inicializamos formUser con los campos
       userFields
@@ -48,5 +53,11 @@ export class LoginFormComponent implements OnChanges{
   onSubmitForm(){
     this.resposeForm.emit(this.formUser.value);
   }
+
+  closeModal(){
+    this.myModal.hide();
+    this.closeModalEvent.emit(true);
+  }
+  
 }
  

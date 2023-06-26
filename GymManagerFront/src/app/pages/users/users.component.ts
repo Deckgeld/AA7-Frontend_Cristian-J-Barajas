@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +17,7 @@ import { AccountService } from 'src/app/core/services/account.service';
 })
 //OnInit & AfterViewInit pertenecen a @angular/core  
 export class UsersComponent implements OnInit {
+[x: string]: any;
 
   displayedColumns: string[] = [
     'email',
@@ -28,14 +34,14 @@ export class UsersComponent implements OnInit {
   //MatSort pertenece a @angular/material/sort
   @ViewChild(MatSort) sort!: MatSort; 
   //!: nos a no iniclizar un valor, sino que espere hasta que tenga uno
-  display : string = 'none';
+  rowSelected: User | undefined;
 
 
   constructor(
     //Importamos nuestro servicio
-    private user:AccountService
-  ) {
-  }
+    private user:AccountService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void{
     //hacemos una consulta
@@ -55,12 +61,48 @@ export class UsersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   openModal(row: User){
-    console.log(row)
-    this.display = "block";
+    this.rowSelected = row;
   }
   onCloseHandled(){
-    this.display = "none";
+    this.rowSelected = undefined;
   }
 
+
+  animal: string | undefined;
+  name: string | undefined;
+
+  openDialog(row: User){
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+}
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'userDialogBoorame.html',
+  standalone: true,
+  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
