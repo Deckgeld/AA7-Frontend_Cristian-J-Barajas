@@ -1,3 +1,4 @@
-<h1>Sig Up</h1>
+<h1>Sign Up</h1>
 
-<app-login-form [isSingUp]="true" [hasSession]="false" (resposeForm)="resposeForm($event)" ></app-login-form>
+<!-- "''" es necesario para que funcione -->
+<app-login-form [isSingUp]="true" [confirmButtonText]="'Sign Up'" (resposeForm)="resposeForm($event)" ></app-login-form>

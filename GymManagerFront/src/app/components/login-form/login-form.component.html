@@ -25,18 +25,16 @@
     </mat-form-field>
     
     <!-- Password input -->
-    <mat-form-field appearance="outline" class="col-md-12 mb-4">
+    <mat-form-field appearance="outline" class="col-md-12 mb-4" *ngIf="!dataUser">
       <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="your password" formControlName="password">
+      <input type="password" matInput placeholder="your password" formCoSntrolName="password">
     </mat-form-field>
     
     <!-- Submit button -->
-    <div *ngIf="hasSession == true; else elseBlock">
-      <button type="button" class="btn btn-warning col-md-6" (click)="closeModal()">Cancel</button>
-      <button type="submit" mat-raised-button color="primary" class="col-md-6" [disabled]="formUser.invalid"> {{isSingUp ? 'Sing up':'Sing in'}} </button>
+    <div class="row">
+      <button mat-raised-button class="col-md-6 px-2" *ngIf="hasSession" (click)="cancelBtn()">Cancelar</button>
+      <button type="submit" mat-raised-button color="primary" [ngClass]="{'col-md-12': !hasSession, 'col-md-6': hasSession}" class="col-md-12 px-2" [disabled]="formUser.invalid"> 
+        {{confirmButtonText}} 
+      </button>
     </div>
-
-    <ng-template #elseBlock>
-      <button type="submit" mat-raised-button color="primary" class="col-md-12" [disabled]="formUser.invalid"> {{isSingUp ? 'Sing up':'Sing in'}} </button>
-    </ng-template>
   </form>

@@ -1,0 +1,16 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Register</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()" ></button>
+        </div>
+        <div class="modal-body">
+          <!-- si solo mostramos la row dira [object Object] -->
+          <!-- {{ row  | json}} -->
+          <!-- resposeForm & cancelForm se quedan esperando a que se dispare el evento, una vez que lo hace ejecutan los metodos, pasando el evento como parametros -->
+          <app-login-form [isSingUp]="true" [confirmButtonText]="'Create User'" [dataUser]="row" (resposeForm)="resposeForm($event)" (cancelForm)="cancelForm($event)" ></app-login-form>        
+        </div>
+      </div>
+    </div>
+</div>

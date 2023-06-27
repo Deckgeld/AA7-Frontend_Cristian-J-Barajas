@@ -35,6 +35,8 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort; 
   //!: nos a no iniclizar un valor, sino que espere hasta que tenga uno
   rowSelected: User | undefined;
+  newUser = false;
+
 
 
   constructor(
@@ -65,9 +67,24 @@ export class UsersComponent implements OnInit {
   openModal(row: User){
     this.rowSelected = row;
   }
+
+  openModalNew(){
+    this.newUser = true;
+  }
+
   onCloseHandled(){
     this.rowSelected = undefined;
+    this.newUser = false
   }
+
+
+
+
+
+
+
+
+
 
 
   animal: string | undefined;
