@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 
@@ -36,7 +37,8 @@ export class UsersComponent implements OnInit {
   //!: nos a no iniclizar un valor, sino que espere hasta que tenga uno
   rowSelected: User | undefined;
   newUser = false;
-
+  //Esto es para poder desuscribirse a la peticio, ya que haremos una nueva
+  DataUsers!: Subscription;
 
 
   constructor(
@@ -46,12 +48,18 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void{
-    //hacemos una consulta
-    this.user.getUsers().subscribe(response => {
-      this.dataSource = new MatTableDataSource(response.model)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    this.loadData();
+  }
+
+  //Estos cambios son para la limpieza el codigo
+  loadData(){
+    //Carga la informacion de la tabla de users
+    this.DataUsers =
+      this.user.getUsers().subscribe(response => {
+        this.dataSource = new MatTableDataSource(response.model)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   }
 
   //Metodo de filtro
@@ -72,12 +80,15 @@ export class UsersComponent implements OnInit {
     this.newUser = true;
   }
 
-  onCloseHandled(){
+  onCloseHandled(dataModal: any){
     this.rowSelected = undefined;
     this.newUser = false
+
+    if (dataModal.refreshData){
+      this.DataUsers.unsubscribe();
+      this.loadData();
+    }
   }
-
-
 
 
 

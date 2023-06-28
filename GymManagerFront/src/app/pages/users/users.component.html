@@ -47,4 +47,4 @@
 </div>
 
 
-<app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled()"></app-user-editor>
+<app-user-editor *ngIf="rowSelected || newUser" [row]="rowSelected" (closeModalEvent)="onCloseHandled($event)"></app-user-editor>

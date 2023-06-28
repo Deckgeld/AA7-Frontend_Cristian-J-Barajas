@@ -39,19 +39,19 @@ export class LoginFormComponent implements OnChanges {
     this.initForm();
     this.validatorSession();
 
+    //Esta validacion es para la pagina de Users
     if(!!dataUser?.currentValue){
-      //Esta linea es la que coloca los datos en los inputs
       this.loadUserInForm(dataUser.currentValue);
     }
   }
   loadUserInForm(currentValue: User) {
-    // this.formUser.get('firstName')?.setValue(currentValue.firstName)
+      //Esta linea es la que coloca los datos en los inputs
     this.formUser.patchValue(currentValue);
   }
 
   validatorSession() {
     const session = this.cookie.get('session');
-
+    
     let dataUser;
     if (!!session) {
       dataUser = JSON.parse(atob(session !== undefined ? session : ''));
@@ -69,17 +69,20 @@ export class LoginFormComponent implements OnChanges {
     let userFields = { ...this.defaultFields }
     //Si estamos en la pagina de SingUp, agreamos los capos extras
     if (this.isSingUp) {
+
       userFields = { ...this.defaultFields, ...this.extraFields }
     }
-
+    //inicializamos formUser con los campos
     this.formUser = this.fb.group(
-      //inicializamos formUser con los campos
       userFields
     )
-    this.formUser.removeControl('password');
+    if(!!this.dataUser){
+      this.formUser.removeControl('password');
+      this.formUser.removeControl('email');
+    }
   }
 
-  //Ya inisializado el form, lo imprimimos
+  //Metodo disparador de eventos
   onSubmitForm() {
     this.resposeForm.emit(this.formUser.value);
   }

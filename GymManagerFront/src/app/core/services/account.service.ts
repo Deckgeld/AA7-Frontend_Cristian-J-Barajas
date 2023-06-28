@@ -60,4 +60,10 @@ export class AccountService {
     return <any>this.http.post<ResponseModel<any>>(url, request, this.httpOptions)
       .pipe(catchError(this.errorHandler));
   }
+
+  updateUser(request: User, id:string): Observable<ResponseModel<any>>{
+    let url: string = `${this.urlBase}api/user/${id}`;   
+    return <any>this.http.put<ResponseModel<any>>(url, request, this.httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
 }

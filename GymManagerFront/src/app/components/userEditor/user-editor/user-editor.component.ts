@@ -16,30 +16,45 @@ export class UserEditorComponent {
 
   //Pedimos el user del row seleccionado
   @Input() row?: User;
-  @Input() confirmButtonText = 'Create User';
+  @Input() confirmButtonText = '';
 
-  @Output() closeModalEvent: EventEmitter<boolean> = new EventEmitter<boolean>()
+  @Output() closeModalEvent: EventEmitter<Object> = new EventEmitter<Object>()
   myModal!: bootstrap.Modal;
 
   ngOnInit():void{
     //obtenemos el modal user-editor.component.html y cremos uno nuevo
     this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrop'));
     this.myModal.show()
+    if(!!this.row){
+      this.confirmButtonText = 'Update User';
+    }    
   }
 
-  closeModal(){
+  closeModal(refresh: boolean = false){
     this.myModal.hide();
-    this.closeModalEvent.emit(true);
+    let close = {
+      closeModal: true,
+      refreshData: refresh
+    }
+    this.closeModalEvent.emit(close);
   }
 
   resposeForm(response:User){
-    console.log('Respuesta desde Sign Up', response)
-    let request = {...response, status:true }
-    console.log(request);
-    this.userService.SignUp(request).subscribe(console.log);
+    let request = {...response, status:true } 
+
+    if(!!this.row && this.row.id){
+      this.userService.updateUser(request, this.row.id).subscribe((resp)=>{
+        if (!resp.hasError){
+          this.closeModal(true);
+        }
+      });
+    }else{
+      this.userService.SignUp(request).subscribe(console.log);
+    }
   }
   cancelForm(close: boolean) {
     if(close)
       this.closeModal();
+    console.log(this.confirmButtonText);
   }
 }

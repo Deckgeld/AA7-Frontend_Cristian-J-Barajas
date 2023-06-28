@@ -19,7 +19,7 @@
     </div>
 
     <!-- Email input -->    
-    <mat-form-field appearance="outline" class="col-md-12 mb-4">
+    <mat-form-field appearance="outline" class="col-md-12 mb-4" *ngIf="!dataUser">
       <mat-label>Email</mat-label>
       <input type="email" matInput placeholder="pat@example.com" formControlName="email">
     </mat-form-field>
@@ -27,7 +27,7 @@
     <!-- Password input -->
     <mat-form-field appearance="outline" class="col-md-12 mb-4" *ngIf="!dataUser">
       <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="your password" formCoSntrolName="password">
+      <input type="password" matInput placeholder="your password" formControlName="password">
     </mat-form-field>
     
     <!-- Submit button -->
@@ -36,5 +36,6 @@
       <button type="submit" mat-raised-button color="primary" [ngClass]="{'col-md-12': !hasSession, 'col-md-6': hasSession}" class="col-md-12 px-2" [disabled]="formUser.invalid"> 
         {{confirmButtonText}} 
       </button>
+      
     </div>
   </form>
