@@ -1,13 +1,10 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { UserEditorDComponent } from 'src/app/components/userEditorDialog/user-editor/user-editor.component';
 import { User } from 'src/app/core/interfaces/user';
 import { AccountService } from 'src/app/core/services/account.service';
 
@@ -90,47 +87,13 @@ export class UsersComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-  animal: string | undefined;
-  name: string | undefined;
-
   openDialog(row: User){
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      data: {name: this.name, animal: this.animal},
+    const dialogRef = this.dialog.open(UserEditorDComponent, {
+      data: row,
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log('The dialog was closed', result);
     });
-  }
-}
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'userDialogBoorame.html',
-  standalone: true,
-  imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
-})
-export class DialogOverviewExampleDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 }

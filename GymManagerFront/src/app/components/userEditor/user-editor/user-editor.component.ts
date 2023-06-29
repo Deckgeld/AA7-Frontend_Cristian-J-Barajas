@@ -9,11 +9,7 @@ import { AccountService } from 'src/app/core/services/account.service';
   templateUrl: './user-editor.component.html',
   styleUrls: ['./user-editor.component.scss']
 })
-export class UserEditorComponent {
-  constructor(
-    private userService: AccountService
-  ) {}
-
+export class UserEditorComponent implements OnInit{
   //Pedimos el user del row seleccionado
   @Input() row?: User;
   @Input() confirmButtonText = '';
@@ -21,12 +17,21 @@ export class UserEditorComponent {
   @Output() closeModalEvent: EventEmitter<Object> = new EventEmitter<Object>()
   myModal!: bootstrap.Modal;
 
+  constructor(
+    private userService: AccountService
+  ) {
+    console.log(this.confirmButtonText, '1');
+  }
+
   ngOnInit():void{
+    console.log(this.confirmButtonText, '2');
     //obtenemos el modal user-editor.component.html y cremos uno nuevo
     this.myModal = new bootstrap.Modal(<HTMLInputElement>document.getElementById('staticBackdrop'));
     this.myModal.show()
     if(!!this.row){
       this.confirmButtonText = 'Update User';
+      console.log(this.confirmButtonText, '3');
+
     }    
   }
 
@@ -55,6 +60,5 @@ export class UserEditorComponent {
   cancelForm(close: boolean) {
     if(close)
       this.closeModal();
-    console.log(this.confirmButtonText);
   }
 }
