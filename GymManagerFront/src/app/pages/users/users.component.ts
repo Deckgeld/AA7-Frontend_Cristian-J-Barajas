@@ -35,7 +35,12 @@ export class UsersComponent implements OnInit {
   rowSelected: User | undefined;
   newUser = false;
   //Esto es para poder desuscribirse a la peticio, ya que haremos una nueva
-  DataUsers!: Subscription;
+  usersSubscription!: Subscription;
+  //Vista de tabla/cards
+  showTable: boolean = true;
+  usersData!: User[];
+  
+  
 
 
   constructor(
@@ -46,16 +51,18 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void{
     this.loadData();
+    console.log(this.usersData);
   }
 
   //Estos cambios son para la limpieza el codigo
   loadData(){
     //Carga la informacion de la tabla de users
-    this.DataUsers =
+    this.usersSubscription =
       this.user.getUsers().subscribe(response => {
         this.dataSource = new MatTableDataSource(response.model)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.usersData = response.model;
       });
   }
 
@@ -82,7 +89,7 @@ export class UsersComponent implements OnInit {
     this.newUser = false
 
     if (dataModal.refreshData){
-      this.DataUsers.unsubscribe();
+      this.usersSubscription.unsubscribe();
       this.loadData();
     }
   }
@@ -90,10 +97,20 @@ export class UsersComponent implements OnInit {
   openDialog(row: User){
     const dialogRef = this.dialog.open(UserEditorDComponent, {
       data: row,
+      //Si le dan click afuera no cierra eldialog
+      disableClose:true,
     });
 
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log('The dialog was closed', result);
     });
+  }
+
+  chageView(){
+    this.showTable = !this.showTable;
+  }
+
+  geIniciales(usr:User){
+    return (usr.firstName).charAt(0) + (usr.lastName).charAt(0);
   }
 }
