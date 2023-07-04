@@ -7,6 +7,8 @@ import { MaterialModel } from 'src/material.module';
 import { LoginFormModule } from 'src/app/components/login-form/login-form.module';
 import { UserEditorModule } from 'src/app/components/userEditor/user-editor/user-editor.module';
 import { UserEditorDModule } from 'src/app/components/userEditorDialog/user-editor/user-editor.module';
+import { BasicCardComponent } from 'src/app/components/cards/basic-card/basic-card.component';
+import { BasicCardModule } from 'src/app/components/cards/basic-card/basic-card.module';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { UserEditorDModule } from 'src/app/components/userEditorDialog/user-edit
     MaterialModel,
     LoginFormModule,
     UserEditorModule,
-    UserEditorDModule
+    UserEditorDModule,
+    BasicCardModule
   ]
 })
 export class UsersModule { }

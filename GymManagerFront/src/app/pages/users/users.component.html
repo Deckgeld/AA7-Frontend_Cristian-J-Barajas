@@ -52,17 +52,21 @@
 
 <ng-template #showCards>
   <div class="row">
-    <div class="card text-center col-md-3" *ngFor="let usr of usersData">
-      <div class="card-header">
-        <strong>{{geIniciales(usr)}}</strong> - {{usr.firstName}} {{usr.lastName}}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{usr.email}}</h5>
-        <p class="card-text">{{usr.phoneNumber}}</p>
-      </div>
-      <div class="card-footer text-muted">
-        {{usr.status? 'Activo': 'Inactivo'}}
+    <div class="col-md-3 py-3" *ngFor="let usr of usersData">
+      <div class="card text-center">
+        <div class="card-header text-truncate">
+          <strong>{{geIniciales(usr)}}</strong> - {{usr.firstName}} {{usr.lastName}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{usr.email}}</h5>
+          <p class="card-text">{{usr.phoneNumber}}</p>
+        </div>
+        <div class="card-footer text-muted">
+          {{usr.status? 'Activo': 'Inactivo'}}
+        </div>
       </div>
     </div>
   </div>
 </ng-template>
+
+<app-basic-card></app-basic-card>

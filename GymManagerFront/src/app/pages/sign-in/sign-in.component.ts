@@ -36,7 +36,11 @@ export class SignInComponent {
         this.cookie.put('session', objTemp)
         this.router.navigate(['/home']);
       }
-    },);
+    },(error:any) => {
+      //Esto esuna mala practica, asi que ten cuidado con relizarlo 
+      this.alertS.errorAlert('Servicio no disponible por el momento, favor de contatar a su administrado', 'Lo sentimos')
+      console.log(error)
+    });
   }
 }
 
