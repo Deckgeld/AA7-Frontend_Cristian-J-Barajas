@@ -6,6 +6,22 @@
 @import "node_modules/bootstrap/scss/navbar";
 @import "node_modules/bootstrap/scss/forms";
 
-.bg-custom-blue-800{
+.bg-custom-blue-800 {
     background-color: $blue-800;
+}
+
+.bg-custom-gradient-1 {
+    background: #CE5937;
+    background: -moz-linear-gradient(45deg, #CE5937 0%, #1C6EA4 69%, #C59237 100%);
+    background: -webkit-linear-gradient(45deg, #CE5937 0%, #1C6EA4 69%, #C59237 100%);
+    background: linear-gradient(45deg, #CE5937 0%, #1C6EA4 69%, #C59237 100%);
+}
+
+.text-color-green {
+    color: transparent;
+    background: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255, 255, 255, 0.5);
 }

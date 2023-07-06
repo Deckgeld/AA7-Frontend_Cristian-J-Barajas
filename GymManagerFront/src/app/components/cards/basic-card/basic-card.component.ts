@@ -20,22 +20,22 @@ export class BasicCardComponent implements OnChanges{
       //Cambiamos el tipo dato tanto aqui como en la interfaz
       title: ['firstName', 'lastName'],
       //title: ['email'], si hacemos esto colocara el email de una
-      titleClass: '',
+      titleClass: 'text-uppercase text-start',
       siglas: 'TT',
     },
     body:{
-      title:'',
+      title:'firstName',
       titleClass:'',
       desc:'email',
       descClass:'',
       subDesc:'phoneNumber',
-      subDescClass:'',
+      subDescClass:'fst-italic',
     },
     footer:{
-      footerClass:'',
-      label:'status',
       //Se declara porque es un tipo enum(contante)
-      footerType: footerType.typeBtn
+      footerType: footerType.typeBtn,
+      label:'status',
+      footerClass:'col-md-12 fw-bolder text-color-green'
     }
   }
 

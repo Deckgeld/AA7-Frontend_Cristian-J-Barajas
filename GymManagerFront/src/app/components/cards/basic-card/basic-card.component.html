@@ -13,10 +13,13 @@
 
                 <div class="card-body">
                     <!-- Titulo y descripcion -->
-                    <h5 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
+                    <h4 class="card-title" [ngClass]="!!card.body.title ? card.body.title : ''" *ngIf="!!card.body.title">
                         <!-- usamos el valor que queremos como indice para el arrray -->
+                        {{UserData[card.body.title]}}
+                    </h4>
+                    <h4 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
                         {{UserData[card.body.desc]}}
-                    </h5>
+                    </h4>
                     <p class="card-text" [ngClass]="!!card.body.descClass ? card.body.descClass : ''"
                         *ngIf="!!card.body.subDesc">
                         {{UserData[card.body.subDesc]}} </p>
@@ -24,11 +27,12 @@
 
                 <div class="card-footer text-muted">
                     <!-- Texto o botones -->
-                    <div *ngIf="card.footer.footerType == 'label';else btnFooter">
+                    <div *ngIf="card.footer.footerType == 'label';else btnFooter" 
+                    [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : '' ">
                         {{UserData[card.footer.label]}}
                     </div>
                     <ng-template #btnFooter>
-                        <button mat-raised-buttom class="pr-2 mr-2"
+                        <button mat-button color="primary"
                             [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : '' " color="prymary">
                             {{card.footer.label}}
                         </button>
