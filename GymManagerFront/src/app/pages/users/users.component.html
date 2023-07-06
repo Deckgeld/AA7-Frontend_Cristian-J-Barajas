@@ -69,4 +69,11 @@
   </div>
 </ng-template>
 
-<app-basic-card></app-basic-card>
+<div class="row">
+  <ng-container *ngFor="let usr of usersData">
+    <!-- Le pasamos el input que necesita -->
+    <app-basic-card class="col-md-3 pt-4" [UserData]="usr"></app-basic-card>
+
+
+  </ng-container>
+</div>

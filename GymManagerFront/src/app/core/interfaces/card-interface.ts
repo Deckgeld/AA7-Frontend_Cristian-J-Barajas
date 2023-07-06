@@ -7,7 +7,7 @@ export interface CardInterface {
 }
 
 export interface Header {
-    title:       string;
+    title:       string[];
     siglas?:     string;
     titleClass?: string;
 }
@@ -23,7 +23,7 @@ export interface Body {
 
 export interface Footer {
     footerType:   footerType;
-    label?:       string;
+    label:       string;
     footerClass?: string;
 }
 

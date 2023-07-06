@@ -1,51 +1,49 @@
-<div class="row">
-    <ng-container [ngSwitch]="card.typeCard">
-        <div>
-            <ng-container *ngSwitchCase="'basic1'">
-                <div class="col-md-3 py-3">
-                    <div class="card text-center">
-    
-                        <div class="card-header text-truncate" *ngIf="!!card.header"
-                            [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' ">
-                            <!-- Titulo de la tarjeta -->
-                            <strong *ngIf="!!card.header.siglas">{{card.header.siglas}}</strong> - {{card.header.title}}
-                        </div>
-    
-                        <div class="card-body">
-                            <!-- Titulo y descripcion -->
-                            <h5 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">{{!!card.body.desc}}</h5>
-                            <p class="card-text" [ngClass]="!!card.body.descClass ? card.body.descClass : ''" *ngIf="!!card.body.subDesc"> 
-                                {{card.body.subDesc}} </p>
-                        </div> 
-    
-                        <div class="card-footer text-muted">
-                            <!-- Texto o botones -->
-                            <div *ngIf="card.footer.footerType == 'label';else btnFooter">
-                                {{card.footer.label}}
-                            </div>
-                            <ng-template #btnFooter>
-                                <button mat-raised-buttom class="pr-2 mr-2" 
-                                [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : '' " 
-                                color="prymary">
-                                    {{card.footer.label}}
-                                </button>
-                            </ng-template>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-                <div class="col-md-3 pt-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                Sorry, tarjeta no configurada
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
-    </ng-container>
+<!-- Eliminamos el div.row que habia, paramejor ponerselo a la hora de invocarlo -->
+<ng-container [ngSwitch]="card.typeCard">
+    <div>
+        <ng-container *ngSwitchCase="'basic1'">
+            <div class="card text-center">
 
-</div>
+                <div class="card-header text-truncate" *ngIf="!!card.header"
+                    [ngClass]="!!card.header.titleClass ? card.header.titleClass : '' ">
+                    <!-- Titulo de la tarjeta -->
+                    <strong *ngIf="!!card.header.siglas">{{card.header.siglas}}</strong> -
+                    {{getArrayToText(card.header.title)}}
+                </div>
+
+                <div class="card-body">
+                    <!-- Titulo y descripcion -->
+                    <h5 class="card-title" [ngClass]="!!card.body.descClass ? card.body.descClass : ''">
+                        <!-- usamos el valor que queremos como indice para el arrray -->
+                        {{UserData[card.body.desc]}}
+                    </h5>
+                    <p class="card-text" [ngClass]="!!card.body.descClass ? card.body.descClass : ''"
+                        *ngIf="!!card.body.subDesc">
+                        {{UserData[card.body.subDesc]}} </p>
+                </div>
+
+                <div class="card-footer text-muted">
+                    <!-- Texto o botones -->
+                    <div *ngIf="card.footer.footerType == 'label';else btnFooter">
+                        {{UserData[card.footer.label]}}
+                    </div>
+                    <ng-template #btnFooter>
+                        <button mat-raised-buttom class="pr-2 mr-2"
+                            [ngClass]="!!card.footer.footerClass ? card.footer.footerClass : '' " color="prymary">
+                            {{card.footer.label}}
+                        </button>
+                    </ng-template>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        Sorry, tarjeta no configurada
+                    </h4>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
