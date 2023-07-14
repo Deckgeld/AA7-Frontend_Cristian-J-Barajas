@@ -1,1 +1,21 @@
-<p>books works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <ng-container *ngFor="let book of books">
+            <div class="col-md-3 py-3">
+                <div class="card text-center">
+                    <div class="card-header text-truncate">
+                        <strong>{{geIniciales(book)}}</strong> - {{book.name}}
+                    </div>
+                    <!--text-truncate nos ayuda a hacer el tamaño de las card fijos, para hacerlo resposivo-->
+                    <div class="card-body text-truncate">
+                        <h5 class="card-title">{{book.description}}</h5>
+                        <p class="card-text">$ {{book.price}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{book.status? 'Activo': 'Inactivo'}}
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
