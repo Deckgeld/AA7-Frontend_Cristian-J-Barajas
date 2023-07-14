@@ -6,10 +6,10 @@
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</a>
+                <a class="nav-link" aria-current="page" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="changeTitle('Home from state')">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/books']" routerLinkActive="router-link-active" >Books</a>
+                <a class="nav-link" [routerLink]="['/books']" routerLinkActive="router-link-active" (click)="changeTitle('Books from state')">Books</a>
             </li>
            
         </ul>

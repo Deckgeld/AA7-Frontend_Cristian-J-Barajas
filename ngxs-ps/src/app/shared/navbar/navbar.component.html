@@ -4,7 +4,7 @@
             <button class="navbar-toggler mx-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h4 class="navbar-brand mx-2" href="#">Home</h4>
+            <h4 class="navbar-brand mx-2" href="#" *ngIf="!!title$">{{title$ | async}}</h4>
         </div>
     </div>
 </nav>
