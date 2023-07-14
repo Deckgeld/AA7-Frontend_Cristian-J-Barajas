@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Selector } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { BooksService, book } from 'src/app/core/services/books.service';
+import { BooksState } from 'src/state/books.state';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +10,11 @@ import { BooksService, book } from 'src/app/core/services/books.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  books!: book[];
+  @Select(BooksState.getBooks) books$!: Observable<book[]>;
 
-  constructor(private bks: BooksService) {  }
+  constructor() {  }
 
   ngOnInit(): void {
-    this.bks.getBooks().subscribe(resp => this.books = resp)
   }
 
   geIniciales(book:book){

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { BooksService, book } from 'src/app/core/services/books.service';
+import { BooksState } from 'src/state/books.state';
 
 @Component({
   selector: 'app-books',
@@ -8,12 +11,9 @@ import { BooksService, book } from 'src/app/core/services/books.service';
 })
 export class BooksComponent {
 
-  books!: book[];
-
-  constructor(private bks: BooksService) {  }
+  @Select(BooksState.getBooks) books$!: Observable<book[]>;
 
   ngOnInit(): void {
-    this.bks.getBooks().subscribe(resp => this.books = resp)
   }
 
   geIniciales(book:book){

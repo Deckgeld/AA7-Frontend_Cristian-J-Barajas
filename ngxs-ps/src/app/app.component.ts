@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { LoadBooksAction } from 'src/state/books.actions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ngxs-ps';
+
+  constructor(private store:Store) { 
+    store.dispatch(new LoadBooksAction());
+  }
+
 }
