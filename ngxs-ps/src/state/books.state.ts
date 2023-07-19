@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddBooksAction, LoadBooksAction } from './books.actions';
+import { AddBooks, EDBooks, LoadBooks } from './books.actions';
 import { BooksService, book } from 'src/app/core/services/books.service';
 import { tap } from 'rxjs';
 
@@ -29,14 +29,14 @@ export class BooksState {
     return books
   }
 
-  @Action(AddBooksAction)
-  addBook({ getState, setState }: StateContext<BooksStateModel>, { payload }: AddBooksAction) {
+  @Action(AddBooks)
+  addBook({ getState, setState }: StateContext<BooksStateModel>, { payload }: AddBooks) {
     const state = getState();
     setState({ books: [ ...state.books, payload ] });
   }
 
-  @Action(LoadBooksAction)
-  loadBooks({ getState, setState }: StateContext<BooksStateModel>): LoadBooksAction {
+  @Action(LoadBooks)
+  loadBooks({ getState, setState }: StateContext<BooksStateModel>): LoadBooks {
     return this.bks.getBooks().pipe(
       tap((books: book[]) => {
         const state = getState();
@@ -44,4 +44,15 @@ export class BooksState {
       })
     )
   }
+
+  @Action(EDBooks)
+  EDBooks({ getState, setState }: StateContext<BooksStateModel>, { payload }: EDBooks) {
+    const state = getState();
+    //Creamos un obj temporal que desechara todos los libros que no tengan el id del payload
+    let bookstmp = state.books.filter(book => book.id !== payload.id);
+    //Establece el stado 
+    setState({ books: [...bookstmp, payload] })
+  }
+
+
 }

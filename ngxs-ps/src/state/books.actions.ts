@@ -1,20 +1,20 @@
 import { book } from "src/app/core/services/books.service";
 
-export class AddBooksAction {
+export class AddBooks {
   static readonly type = '[Books] Add book';
   constructor(public payload: book) { }
 }
 
-export class LoadBooksAction {
+export class LoadBooks {
   static readonly type = '[Books] Load book';
 }
 
-export class UpdateBooksAction {
+export class UpdateBooks {
   static readonly type = '[Books] Update book';
   constructor(public payload: book) { }
 }
 
-export class DeleteBooksAction {
+export class EDBooks {
   static readonly type = '[Books] Delete book';
   constructor(public payload: book) { }
 }

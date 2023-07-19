@@ -4,14 +4,23 @@
             <div class="col-md-3 py-3">
                 <div class="card text-center">
                     <div class="card-header text-truncate">
-                        <strong>{{geIniciales(book)}}</strong> - {{book.name}}
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-11">
+                                <strong>{{geIniciales(book)}}</strong> - {{book.name}}
+                            </div>
+                            <div class="col-md-1">
+                                <i class="fa-solid fa-pen fa-beat" (click)="editBooks(book)"></i>
+                            </div>
+                        </div>
+
                     </div>
                     <!--text-truncate nos ayuda a hacer el tamaño de las card fijos, para hacerlo resposivo-->
                     <div class="card-body text-truncate">
                         <h5 class="card-title">{{book.description}}</h5>
                         <p class="card-text">$ {{book.price}}</p>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div class="card-footer text-muted" (click)="EDBooks(book)">
                         {{book.status? 'Activo': 'Inactivo'}}
                     </div>
                 </div>
