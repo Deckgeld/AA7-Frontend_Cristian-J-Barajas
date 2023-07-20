@@ -9,13 +9,10 @@ export class LoadBooks {
   static readonly type = '[Books] Load book';
 }
 
+//Cambimos el nombre a la accion EDBooks
 export class UpdateBooks {
   static readonly type = '[Books] Update book';
   constructor(public payload: book) { }
 }
 
-export class EDBooks {
-  static readonly type = '[Books] Delete book';
-  constructor(public payload: book) { }
-}
 

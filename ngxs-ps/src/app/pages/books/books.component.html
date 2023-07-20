@@ -9,8 +9,8 @@
                             <div class="col-md-11">
                                 <strong>{{geIniciales(book)}}</strong> - {{book.name}}
                             </div>
-                            <div class="col-md-1">
-                                <i class="fa-solid fa-pen fa-beat" (click)="editBooks(book)"></i>
+                            <div class="col-md-1" (click)="editBooks(book)">
+                                <i class="fa-solid fa-pen fa-beat"></i>
                             </div>
                         </div>
 
@@ -26,5 +26,49 @@
                 </div>
             </div>
         </ng-container>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="myForm">
+                    <div class="mb-3">
+                        <label for="lf" class="form-label">Id:</label>
+                        <input type="number" class="form-control" formControlName="id" placeholder="A number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lf" class="form-label">Name:</label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="A number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lf" class="form-label">description:</label>
+                        <input type="text" class="form-control" formControlName="description" placeholder="A number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lf" class="form-label">Price:</label>
+                        <input type="number" class="form-control" formControlName="price" placeholder="A number">
+                    </div>
+                    
+                    <label for="lf" class="form-label">Status:</label>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="status">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Activo / Inactivo</label>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="subook()">{{isEditorMode ? 'Update book' : 'Save book'}}</button>
+            </div>
+        </div>
     </div>
 </div>
